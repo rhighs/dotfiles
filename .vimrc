@@ -1,4 +1,4 @@
-set rnu
+set nu
 syntax on
 
 filetype plugin indent on
@@ -12,9 +12,9 @@ set expandtab
 set noerrorbells
 set expandtab
 set swapfile
-set incsearch
 set smartindent
-set smartcase
+set noerrorbells
+set completeopt-=preview
 
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
@@ -23,9 +23,21 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
+Plug 'patstockwell/vim-monokai-tasty'
+
+Plug 'crusoexia/vim-monokai'
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'styled-components/vim-styled-components'
+Plug 'elzr/vim-json'
+Plug 'jparise/vim-graphql'
 call plug#end()
 
-colorscheme onedark
+set background=light
+colorscheme monokai
+highlight nonText ctermbg=NONE
+"let g:vim_monokai_tasty_italic = 1                    " allow italics, set this before the colorscheme
+"colorscheme vim-monokai-tasty                         " set the colorscheme
 
 "java syntax checker(useless)
 let g:syntastic_java_checkers = []
@@ -34,4 +46,14 @@ let g:EclimFileTypeValidate = 0
 "nerdtree arrows and sets
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+
+
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_enable_diagnostic_signs = 0 
+let g:ycm_enable_diagnostic_highlighting = 0
+
+
+
 map <C-n> :NERDTreeToggle<CR>
+
+
