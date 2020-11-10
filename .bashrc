@@ -138,3 +138,8 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+[ -s "/home/rob/.jabba/jabba.sh" ] && source "/home/rob/.jabba/jabba.sh"
+alias c.=clear
+alias lsa="ls -a"
+fortune

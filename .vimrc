@@ -1,5 +1,5 @@
 set nu
-syntax on
+syntax enable
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
@@ -14,6 +14,7 @@ set expandtab
 set swapfile
 set smartindent
 set noerrorbells
+set mouse=a
 set completeopt-=preview
 
 call plug#begin('~/.vim/plugged')
@@ -33,7 +34,6 @@ Plug 'elzr/vim-json'
 Plug 'jparise/vim-graphql'
 call plug#end()
 
-set background=light
 colorscheme monokai
 highlight nonText ctermbg=NONE
 "let g:vim_monokai_tasty_italic = 1                    " allow italics, set this before the colorscheme
