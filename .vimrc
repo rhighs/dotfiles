@@ -14,6 +14,7 @@ set smartindent
 set noerrorbells
 set mouse=a
 set completeopt-=preview
+set cursorline
 
 call plug#begin(expand('~/.vim/plugged'))
 Plug 'morhetz/gruvbox'
@@ -22,6 +23,12 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
 Plug 'patstockwell/vim-monokai-tasty'
+Plug 'fcpg/vim-fahrenheit'
+Plug 'sts10/vim-pink-moon'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'andreasvc/vim-256noir'
+Plug 'wojciechkepka/vim-github-dark'
+Plug 'tomasiser/vim-code-dark'
 
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
@@ -30,12 +37,14 @@ Plug 'elzr/vim-json'
 Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
-"needed to make nord-vim render properly
-if (has("termguicolors"))
-  set termguicolors
-endif
+set termguicolors
 
-colorscheme nord
+set background=dark
+colorscheme ghdark
+
+" Change highlighting of cursor line when entering/leaving Insert Mode
+
+"needed to make nord-vim render properly
 "let g:vim_monokai_tasty_italic = 1                    " allow italics, set this before the colorscheme
 "colorscheme vim-monokai-tasty                         " set the colorscheme
 
