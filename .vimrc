@@ -29,6 +29,7 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'andreasvc/vim-256noir'
 Plug 'wojciechkepka/vim-github-dark'
 Plug 'tomasiser/vim-code-dark'
+Plug 'ycm-core/YouCompleteMe'
 
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
