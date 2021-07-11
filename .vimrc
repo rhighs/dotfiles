@@ -5,6 +5,11 @@ set tabstop=4
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
 
+"autotyper
+set rtp+=~/.vim/plugins
+source ~/.vim/plugins/typer.vim
+let g:typer_speed = 1
+
 syntax on
 syntax enable
 set noerrorbells
@@ -15,6 +20,32 @@ set noerrorbells
 set mouse=a
 set completeopt-=preview
 set cursorline
+
+command Savable1 Typer ~/fnm/_QR.txt
+command Savable2 Typer ~/fnm/_corde.txt
+command Savable3 Typer ~/fnm/_falsi.txt
+command Savable4 Typer ~/fnm/_plagr.txt
+command Savable5 Typer ~/fnm/_Lsolve.txt
+command Savable6 Typer ~/fnm/_Usolve.txt
+command Savable7 Typer ~/fnm/_newton.txt
+command Savable8 Typer ~/fnm/_InterpL.txt
+command Savable9 Typer ~/fnm/_LUsolve.txt
+command Savable10 Typer ~/fnm/_elgauss.txt
+command Savable11 Typer ~/fnm/_secanti.txt
+command Savable12 Typer ~/fnm/_LU_pivot.txt
+command Savable13 Typer ~/fnm/_SimpComp.txt
+command Savable14 Typer ~/fnm/_TrapComp.txt
+command Savable15 Typer ~/fnm/_newton_m.txt
+command Savable16 Typer ~/fnm/_simptoll.txt
+command Savable17 Typer ~/fnm/_traptoll.txt
+command Savable18 Typer ~/fnm/_iterazione.txt
+command Savable19 Typer ~/fnm/_solve_nsis.txt
+command Savable20 Typer ~/fnm/_iterazioneg.txt
+command Savable21 Typer ~/fnm/_solve_nsis_f.txt
+command Savable22 Typer ~/fnm/_stima_ordine.txt
+command Savable23 Typer ~/fnm/_punto_fisso.txt
+command Savable24 Typer ~/fnm/_fourier.txt
+command Savable25 Typer ~/fnm/_LU_nopivot.txt
 
 call plug#begin(expand('~/.vim/plugged'))
 Plug 'morhetz/gruvbox'
@@ -28,6 +59,7 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'andreasvc/vim-256noir'
 Plug 'wojciechkepka/vim-github-dark'
 Plug 'tomasiser/vim-code-dark'
+Plug 'sirver/UltiSnips'
 "Plug 'ycm-core/YouCompleteMe'
 Plug 'arzg/vim-colors-xcode'
 
