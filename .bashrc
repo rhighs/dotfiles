@@ -69,12 +69,7 @@ if ${use_color} ; then
 		fi
 	fi
 
-	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-	fi
-
+    PS1="\e[0;35m\u:\e[0;35m\W\e[0;37m \\$\[$(tput sgr0)\] "
 	alias ls='ls --color=auto'
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
@@ -142,4 +137,3 @@ ex ()
 [ -s "/home/rob/.jabba/jabba.sh" ] && source "/home/rob/.jabba/jabba.sh"
 alias c.=clear
 alias lsa="ls -a"
-fortune
