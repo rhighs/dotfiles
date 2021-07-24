@@ -69,7 +69,7 @@ if ${use_color} ; then
 		fi
 	fi
 
-    PS1="\e[0;35m\u:\e[0;35m\W\e[0;37m \\$\[$(tput sgr0)\] "
+    PS1="\\[\e[0;35m\\]\u:\\[\e[0;35m\\]\W\\[\e[0;37m\\] \\$\[$(tput sgr0)\] "
 	alias ls='ls --color=auto'
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
@@ -137,3 +137,7 @@ ex ()
 [ -s "/home/rob/.jabba/jabba.sh" ] && source "/home/rob/.jabba/jabba.sh"
 alias c.=clear
 alias lsa="ls -a"
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[ -f /home/rob/.cache/yay/electron-forge/src/electron-forge-5.2.4/node_modules/tabtab/.completions/electron-forge.bash ] && . /home/rob/.cache/yay/electron-forge/src/electron-forge-5.2.4/node_modules/tabtab/.completions/electron-forge.bash
