@@ -1,16 +1,7 @@
-let g:typer_speed    = 4
+let g:typer_speed    = 1
 let g:typer_zz_count = 16
 
 function! TyperLoop(file)
-	"tabnew
-	let type  = fnamemodify(a:file, ':e')
-	let name  = system('echo $RANDOM')
-	let name  = substitute(name, '\n', '', '')
-	let name  = substitute(name, '\r', '', '')
-	let final = '/tmp/'.name.'.'.type
-	"execute ':write '.final
-	"execute ':edit  '.final
-	"redraw
 	let line_count = 0
 	for line in readfile(a:file)
 		let len = strlen(line)
@@ -31,10 +22,6 @@ function! TyperLoop(file)
 		endif
 		redraw
 	endfor
-	"echo 'Typing has been finished! Press Ctrl+C to exit...'
-	while 1
-		call getchar()
-	endwhile
 endfunction
 
 :command! -nargs=1 -complete=file Typer :call TyperLoop('<args>')
