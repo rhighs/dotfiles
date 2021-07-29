@@ -20,9 +20,7 @@ set mouse=a
 set completeopt-=preview
 set cursorline
 set nocompatible
-set ruler
 set number
-set laststatus=2
 set autoread
 set autowrite
 
@@ -45,11 +43,17 @@ Plug 'wojciechkepka/vim-github-dark'
 Plug 'sts10/vim-pink-moon'
 Plug 'morhetz/gruvbox'
 Plug 'owickstrom/vim-colors-paramount'
+Plug 'junegunn/seoul256.vim'
 call plug#end()
 
 set termguicolors
 set background=dark
+set background=light
+
+echo $TERM_PROGRAM
+
 colorscheme ghdark
+"colorscheme seoul256-light
 
 "nerdtree arrows and sets
 let g:NERDTreeDirArrowExpandable = '▸'
