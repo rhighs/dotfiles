@@ -135,8 +135,20 @@ ex ()
 }
 
 [ -s "/home/rob/.jabba/jabba.sh" ] && source "/home/rob/.jabba/jabba.sh"
+
+#a simple to function to startup pgsql without creating a service.
+#i dont want this shit always running.
+startpgsql ()
+{
+    sudo mkdir /run/postgresql/
+    sudo chmod -R 777 /run/postgresql/
+    postgres -D $HOME/.pgsql/data
+}
+
 alias c.=clear
 alias lsa="ls -a"
+alias vrc="vim ~/.vimrc"
+alias brc="vim ~/.bashrc"
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
