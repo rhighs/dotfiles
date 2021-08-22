@@ -145,6 +145,11 @@ startpgsql ()
     postgres -D $HOME/.pgsql/data
 }
 
+replacetabs ()
+{
+    find $1 -iwholename *.$2 -type f -exec sed -i.orig 's/\t/    /g' {} +
+}
+
 alias c.=clear
 alias lsa="ls -a"
 alias vrc="vim ~/.vimrc"
