@@ -27,9 +27,10 @@ set autowrite
 call plug#begin(expand('~/.vim/plugged'))
 "languages and typing
 Plug 'pangloss/vim-javascript'
+Plug 'thesis/vim-solidity'
 Plug 'elzr/vim-json'
 
-"uitl
+"util
 Plug 'christoomey/vim-system-copy'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdtree'
@@ -44,16 +45,16 @@ Plug 'sts10/vim-pink-moon'
 Plug 'morhetz/gruvbox'
 Plug 'owickstrom/vim-colors-paramount'
 Plug 'junegunn/seoul256.vim'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'skurob/robpur-vim'
 call plug#end()
 
 set termguicolors
 set background=dark
-set background=light
-
-echo $TERM_PROGRAM
 
 colorscheme ghdark
-"colorscheme seoul256-light
+"colorscheme moonfly
+"colorscheme robpur-mk2
 
 "nerdtree arrows and sets
 let g:NERDTreeDirArrowExpandable = '▸'

@@ -147,7 +147,7 @@ startpgsql ()
 
 replacetabs ()
 {
-    find $1 -iwholename *.$2 -type f -exec sed -i.orig 's/\t/    /g' {} +
+    find $1 -iname "*.${2}" -type f -exec sed -i.orig 's/\t/    /g' {} +
 }
 
 alias c.=clear
