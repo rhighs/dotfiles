@@ -23,6 +23,7 @@ set nocompatible
 set number
 set autoread
 set autowrite
+set tw=100
 
 call plug#begin(expand('~/.vim/plugged'))
 "languages and typing
@@ -52,9 +53,9 @@ call plug#end()
 set termguicolors
 set background=dark
 
-colorscheme ghdark
+"colorscheme ghdark
 "colorscheme moonfly
-"colorscheme robpur-mk2
+colorscheme robpur-mk2
 
 "nerdtree arrows and sets
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -221,7 +222,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -241,3 +242,10 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" =================== CUSTOM MAPPINGS ========================
+"map <esc> :noh <CR>
+"
+
+"status line settings
+set laststatus=2
+source ~/.vim/plugged/robpur-vim/autoload/robpur-status.vim
