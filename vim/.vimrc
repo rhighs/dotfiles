@@ -42,20 +42,26 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "themes
 Plug 'wojciechkepka/vim-github-dark'
-Plug 'sts10/vim-pink-moon'
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'morhetz/gruvbox'
-Plug 'owickstrom/vim-colors-paramount'
-Plug 'junegunn/seoul256.vim'
-Plug 'bluz71/vim-moonfly-colors'
 Plug 'skurob/robpur-vim'
+Plug 'blueshirts/darcula'
+Plug 'jnurmine/Zenburn'
+Plug 'tomasiser/vim-code-dark'
+Plug 'drsooch/gruber-darker-vim'
+Plug 'sickill/vim-monokai'
+Plug 'lifepillar/vim-solarized8'
 call plug#end()
 
 set termguicolors
 set background=dark
-
-"colorscheme ghdark
-"colorscheme moonfly
-colorscheme robpur-mk2
+colorscheme solarized8
+"colorscheme darcula
+"colorscheme GruberDarker
+"highlight clear LineNr
+"set t_Co=256
+"set t_ut=
+"let g:codedark_conservative = 1
 
 "nerdtree arrows and sets
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -73,7 +79,6 @@ let g:system_copy_silent = 1
 "
 " =================== NERD TREE ============================
 map <C-n> :NERDTreeToggle<CR>
-
 " =================== Coc SETTIGNGS ========================
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -244,8 +249,59 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " =================== CUSTOM MAPPINGS ========================
 "map <esc> :noh <CR>
-"
 
-"status line settings
+func! CompileRun()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!time java %"
+    elseif &filetype == 'sh'
+        exec "!time bash %"
+    elseif &filetype == 'python'
+        exec "!time python3 %"
+    elseif &filetype == 'html'
+        exec "!google-chrome % &"
+    elseif &filetype == 'go'
+        exec "!go build %<"
+        exec "!time go run %"
+    elseif &filetype == 'matlab'
+        exec "!time octave %"
+    endif
+endfunc
+
+command CompileRun call CompileRun()
+
+" =================== STATUS LINE ========================
 set laststatus=2
+
+" function! GitBranch()
+"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+" endfunction
+" 
+" function! StatuslineGit()
+"   let l:branchname = GitBranch()
+"   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+" endfunction
+" 
+" set statusline=
+" set statusline+=%#PmenuSel#
+" set statusline+=%{StatuslineGit()}
+" set statusline+=%#LineNr#
+" set statusline+=\ %f
+" set statusline+=%m\
+" set statusline+=%=
+" set statusline+=%#CursorColumn#
+" set statusline+=\ %y
+" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" set statusline+=\[%{&fileformat}\]
+" set statusline+=\ %p%%
+" set statusline+=\ %l:%c
+" set statusline+=\
+ 
 source ~/.vim/plugged/robpur-vim/autoload/robpur-status.vim
