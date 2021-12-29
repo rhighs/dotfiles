@@ -134,8 +134,6 @@ ex ()
   fi
 }
 
-[ -s "/home/rob/.jabba/jabba.sh" ] && source "/home/rob/.jabba/jabba.sh"
-
 #a simple to function to startup pgsql without creating a service.
 #i dont want this shit always running.
 startpgsql ()
@@ -158,6 +156,11 @@ webmp3 ()
     done;
 }
 
+cleanswap ()
+{
+    sudo swapoff -a && sudo swapon -a;
+}
+
 alias c.=clear
 alias lsa="ls -a"
 alias vrc="vim ~/.vimrc"
@@ -166,3 +169,4 @@ alias brc="vim ~/.bashrc"
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [ -f /home/rob/.cache/yay/electron-forge/src/electron-forge-5.2.4/node_modules/tabtab/.completions/electron-forge.bash ] && . /home/rob/.cache/yay/electron-forge/src/electron-forge-5.2.4/node_modules/tabtab/.completions/electron-forge.bash
+MANPATH=/usr/share/man

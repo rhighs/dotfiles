@@ -1,4 +1,5 @@
 filetype plugin indent on
+
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
@@ -23,10 +24,12 @@ set nocompatible
 set number
 set autoread
 set autowrite
-set tw=100
+set tw=140
 
 call plug#begin(expand('~/.vim/plugged'))
 "languages and typing
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'pangloss/vim-javascript'
 Plug 'thesis/vim-solidity'
 Plug 'elzr/vim-json'
@@ -51,11 +54,12 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'drsooch/gruber-darker-vim'
 Plug 'sickill/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
+Plug 'vim-latex/vim-latex'
 call plug#end()
 
 set termguicolors
 set background=dark
-colorscheme solarized8
+colorscheme robpur-mk2
 "colorscheme darcula
 "colorscheme GruberDarker
 "highlight clear LineNr
