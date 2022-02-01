@@ -55,11 +55,12 @@ Plug 'drsooch/gruber-darker-vim'
 Plug 'sickill/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
 Plug 'vim-latex/vim-latex'
+Plug 'joshdick/onedark.vim'
 call plug#end()
 
 set termguicolors
 set background=dark
-colorscheme robpur-mk2
+colorscheme onedark
 "colorscheme darcula
 "colorscheme GruberDarker
 "highlight clear LineNr
@@ -253,33 +254,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " =================== CUSTOM MAPPINGS ========================
 "map <esc> :noh <CR>
-
-func! CompileRun()
-    exec "w"
-    if &filetype == 'c'
-        exec "!gcc % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!time java %"
-    elseif &filetype == 'sh'
-        exec "!time bash %"
-    elseif &filetype == 'python'
-        exec "!time python3 %"
-    elseif &filetype == 'html'
-        exec "!google-chrome % &"
-    elseif &filetype == 'go'
-        exec "!go build %<"
-        exec "!time go run %"
-    elseif &filetype == 'matlab'
-        exec "!time octave %"
-    endif
-endfunc
-
-command CompileRun call CompileRun()
 
 " =================== STATUS LINE ========================
 set laststatus=2
