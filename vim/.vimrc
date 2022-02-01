@@ -6,7 +6,6 @@ set tabstop=4
 set shiftwidth=4
 
 syntax on
-syntax enable
 
 set rnu
 set noerrorbells
@@ -55,12 +54,12 @@ Plug 'drsooch/gruber-darker-vim'
 Plug 'sickill/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
 Plug 'vim-latex/vim-latex'
-Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 call plug#end()
 
 set termguicolors
+colorscheme one
 set background=dark
-colorscheme onedark
 "colorscheme darcula
 "colorscheme GruberDarker
 "highlight clear LineNr
