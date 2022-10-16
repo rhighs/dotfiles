@@ -88,7 +88,7 @@ let g:system_copy_silent = 1
 " =================== NERD TREE ============================
 map <C-n> :NERDTreeToggle<CR>
 " =================== Coc SETTIGNGS ========================
-" 
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<TAB>"
 " " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " " unicode characters in the file autoload/float.vim
 " set encoding=utf-8
