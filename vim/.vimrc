@@ -31,9 +31,11 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'pangloss/vim-javascript'
 Plug 'thesis/vim-solidity'
-Plug 'vim-latex/vim-latex'
 Plug 'elzr/vim-json'
 Plug 'elixir-editors/vim-elixir'
+Plug 'zah/nim.vim'
+Plug 'tikhomirov/vim-glsl'
+Plug 'cheap-glitch/vim-v'
 
 "util
 Plug 'christoomey/vim-system-copy'
@@ -65,11 +67,14 @@ set background=dark
 colorscheme ariake
 "colorscheme one
 "colorscheme darcula
+"colorscheme robpur-mk2
 "colorscheme GruberDarker
 "highlight clear LineNr
 "set t_Co=256
 "set t_ut=
 "let g:codedark_conservative = 1
+"hi Normal ctermbg=16 guibg=#000000
+"hi LineNr ctermbg=16 guibg=#000000
 
 "nerdtree arrows and sets
 let g:NERDTreeDirArrowExpandable = '▸'
