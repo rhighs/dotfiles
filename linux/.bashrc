@@ -1,8 +1,7 @@
-#
-# ~/.bashrc
-#
-
 [[ $- != *i* ]] && return
+
+# common scripts entry sh
+[ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
 
 colors() {
 	local fgc bgc vals seq0
@@ -109,6 +108,35 @@ shopt -s extglob
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
+todo ()
+{
+    vim ~/.local/.todo-items
+}
+
+colima-start ()
+{
+    # this --vm-arg was really just for an insufficient memory error given by an elastic search container
+    # on a sonarqube docker compose file...
+    # other params are setting: 4 cores, 8GB mem for colima to be used
+    #
+    # provision:
+    #   - mode: system
+    #   script: sysctl -w vm.max_map_count=262144
+    #
+    # make sure to set this value in `colima template`
+    colima start --cpu 4 --memory 8 ;
+}
+
+postgres-start ()
+{
+    docker run --name postgres-temp -d -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:12;
+}
+
+postgres-stop ()
+{
+    docker stop postgres-temp && docker rm postgres-temp;
+}
+
 #
 # # ex - archive extractor
 # # usage: ex <file>
@@ -134,39 +162,15 @@ ex ()
   fi
 }
 
-#a simple to function to startup pgsql without creating a service.
-#i dont want this shit always running.
-startpgsql ()
-{
-    sudo mkdir /run/postgresql/
-    sudo chmod -R 777 /run/postgresql/
-    postgres -D $HOME/.pgsql/data
-}
-
 replacetabs ()
 {
     find $1 -iname "*.${2}" -type f -exec sed -i.orig 's/\t/    /g' {} +
 }
 
-webmp3 ()
+webm2mp3 ()
 {
     for FILE in *.webm; do
         echo -e "Processing video '\e[32m$FILE\e[0m'";
         ffmpeg -i "${FILE}" -vn -ab 128k -ar 44100 -y "${FILE%.webm}.mp3";
     done;
 }
-
-cleanswap ()
-{
-    sudo swapoff -a && sudo swapon -a;
-}
-
-alias c.=clear
-alias lsa="ls -a"
-alias vrc="vim ~/.vimrc"
-alias brc="vim ~/.bashrc"
-
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[ -f /home/rob/.cache/yay/electron-forge/src/electron-forge-5.2.4/node_modules/tabtab/.completions/electron-forge.bash ] && . /home/rob/.cache/yay/electron-forge/src/electron-forge-5.2.4/node_modules/tabtab/.completions/electron-forge.bash
-MANPATH=/usr/share/man
