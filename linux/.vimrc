@@ -64,7 +64,7 @@ call plug#end()
 
 set termguicolors
 set background=dark
-colorscheme ariake
+colorscheme eva01
 "colorscheme one
 "colorscheme darcula
 "colorscheme robpur-mk2
