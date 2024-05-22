@@ -24,6 +24,7 @@ set number
 set autoread
 set autowrite
 set tw=140
+set backspace=indent,eol,start
 
 call plug#begin(expand('~/.vim/plugged'))
 "languages and typing
@@ -64,7 +65,7 @@ call plug#end()
 
 set termguicolors
 set background=dark
-colorscheme ariake
+colorscheme eva01
 "colorscheme one
 "colorscheme darcula
 "colorscheme robpur-mk2

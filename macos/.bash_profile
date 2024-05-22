@@ -7,3 +7,4 @@ export GPG_TTY
 
 # lmao, MacOS the "good" OS...
 source ~/.bashrc
+. "$HOME/.cargo/env"

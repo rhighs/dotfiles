@@ -1,9 +1,6 @@
 alias python=python3
 alias pip=pip3
 
-# common scripts entry sh
-[ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
-
 eval $(/opt/homebrew/bin/brew shellenv)
 
 export NVM_DIR="$HOME/.nvm"
@@ -120,8 +117,12 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export OPENAI_NAME="MacOS-api-key-access-point"
-export OPENAI_API_KEY=""
+# custom binaries
+export PATH="$PATH:$HOME/.local/bin"
+
+# common scripts entry sh
+[ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
 
 [ -f "/Users/rmontalti/.ghcup/env" ] && source "/Users/rmontalti/.ghcup/env" # ghcup-env
 
+. "$HOME/.cargo/env"
