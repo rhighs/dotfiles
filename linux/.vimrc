@@ -81,9 +81,13 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
 " =================== CPCV SETTIGNGS ========================
-let g:system_copy#copy_command='xclip -sel clipboard'
-let g:system_copy#paste_command='xclip -sel clipboard -o'
-let g:system_copy_silent = 1
+" let g:system_copy#copy_command='xclip -sel clipboard'
+" let g:system_copy#paste_command='xclip -sel clipboard -o'
+" let g:system_copy_silent = 1
+" set clipboard=unnamedplus
+
+vnoremap <C-c> "+y
+map <C-p> "+p
 
 " =================== NERD TREE ============================
 map <C-n> :NERDTreeToggle<CR>
