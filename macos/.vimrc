@@ -7,6 +7,9 @@ set shiftwidth=4
 
 syntax on
 
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+
 set rnu
 set noerrorbells
 set expandtab

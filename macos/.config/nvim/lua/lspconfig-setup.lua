@@ -1,19 +1,4 @@
--- vim.cmd [[ packadd completion-nvim ]]
--- vim.cmd [[ packadd nvim-lspconfig ]]
-
 local lsp_config = require("lspconfig")
--- local completion = require("completion")
--- 
--- local custom_attach = function()
---   completion.on_attach()
---   -- Move cursor to the next and previous diagnostic
---   mapper("n", "<leader>dn", "vim.lsp.diagnostic.goto_next()")
---   mapper("n", "<leader>dp", "vim.lsp.diagnostic.goto_prev()")
--- end
--- 
--- lsp.pyls.setup{
---   on_attach = custom_attach
--- }
 
 local cmp = require("cmp")
 cmp.setup({

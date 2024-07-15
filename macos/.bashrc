@@ -126,3 +126,14 @@ export PATH="$PATH:$HOME/.local/bin"
 [ -f "/Users/rmontalti/.ghcup/env" ] && source "/Users/rmontalti/.ghcup/env" # ghcup-env
 
 . "$HOME/.cargo/env"
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}"  ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# pnpm
+export PNPM_HOME="/Users/rmontalti/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
