@@ -155,5 +155,8 @@ nmap <leader>ca  <Plug>(coc-codeaction-selected)
 
 " =================== STATUS LINE ========================
 set laststatus=2
- 
+
+" disable Ex Mode
+map Q <Nop>
+
 source ~/.vim/plugged/robpur-vim/autoload/robpur-status.vim
