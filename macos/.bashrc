@@ -58,7 +58,7 @@ colima-start ()
     #   script: sysctl -w vm.max_map_count=262144
     #
     # make sure to set this value in `colima template`
-    colima start --cpu 4 --memory 8 ;
+    colima start --cpu 4 --memory 8 --vm-type=vz;
 }
 
 postgres-start ()
@@ -109,6 +109,24 @@ webm2mp3 ()
     done;
 }
 
+git-del-missing-branches () {
+    local remote="${1:-origin}"
+    git fetch --prune "$remote";
+    DBRANCHES=$(for branch in $(git for-each-ref --format='%(refname:short)' refs/heads/*); do
+        if ! git ls-remote --exit-code --heads "$remote" "$branch" > /dev/null; then
+            echo "$branch"
+        fi
+    done)
+    if [ -n "$DBRANCHES" ]; then
+        echo -e "Found missing branches:\n\n$DBRANCHES\n"
+        read -p "Are you sure to want to delete them? (Y/n): " confirm
+        confirm=${confirm:-Y}
+        if [[ "$confirm" =~ ^[Yy]$ ]]; then
+            echo "$DBRANCHES" | xargs -r git branch -D
+        fi
+    fi
+}
+
 #android stuff
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -137,3 +155,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+export PATH=$PATH:$(npm config get prefix)/bin
+export PATH=$PATH:$(go env GOPATH)/bin
