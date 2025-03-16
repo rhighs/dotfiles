@@ -7,6 +7,9 @@ set shiftwidth=4
 
 syntax on
 
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+
 set rnu
 set noerrorbells
 set expandtab
@@ -24,6 +27,7 @@ set number
 set autoread
 set autowrite
 set tw=140
+set backspace=indent,eol,start
 
 call plug#begin(expand('~/.vim/plugged'))
 "languages and typing
@@ -49,6 +53,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "themes
 Plug 'hachy/eva01.vim', { 'branch': 'main' }
+Plug 'uloco/bluloco.nvim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'morhetz/gruvbox'
 Plug 'skurob/robpur-vim'
@@ -63,8 +68,9 @@ Plug 'rakr/vim-one'
 call plug#end()
 
 set termguicolors
-set background=dark
+set background=light
 colorscheme eva01
+"colorscheme ariake
 "colorscheme one
 "colorscheme darcula
 "colorscheme robpur-mk2
@@ -84,8 +90,15 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " let g:system_copy#copy_command='xclip -sel clipboard'
 " let g:system_copy#paste_command='xclip -sel clipboard -o'
 " let g:system_copy_silent = 1
-" set clipboard=unnamedplus
 
+" this works for some reason
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
+
+" no effect on tmux session
 vnoremap <C-c> "+y
 map <C-p> "+p
 
@@ -155,8 +168,5 @@ nmap <leader>ca  <Plug>(coc-codeaction-selected)
 
 " =================== STATUS LINE ========================
 set laststatus=2
-
-" disable Ex Mode
-map Q <Nop>
-
+ 
 source ~/.vim/plugged/robpur-vim/autoload/robpur-status.vim
