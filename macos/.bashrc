@@ -127,6 +127,9 @@ git-del-missing-branches () {
     fi
 }
 
+# include user base python bins, for whatever python version is the default
+export PATH="$PATH:$(python -m site --user-base)/bin"
+
 #android stuff
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -158,3 +161,23 @@ esac
 
 export PATH=$PATH:$(npm config get prefix)/bin
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/Users/rmontalti/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/Users/rmontalti/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
+# 
+eval "$(thefuck --alias)"
+
+export PATH="/opt/homebrew/opt/llvm\@14/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

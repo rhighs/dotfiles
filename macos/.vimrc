@@ -53,6 +53,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "themes
 Plug 'hachy/eva01.vim', { 'branch': 'main' }
+Plug 'uloco/bluloco.nvim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'morhetz/gruvbox'
 Plug 'skurob/robpur-vim'
@@ -67,8 +68,9 @@ Plug 'rakr/vim-one'
 call plug#end()
 
 set termguicolors
-set background=dark
+set background=light
 colorscheme eva01
+"colorscheme ariake
 "colorscheme one
 "colorscheme darcula
 "colorscheme robpur-mk2
@@ -88,8 +90,15 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " let g:system_copy#copy_command='xclip -sel clipboard'
 " let g:system_copy#paste_command='xclip -sel clipboard -o'
 " let g:system_copy_silent = 1
-" set clipboard=unnamedplus
 
+" this works for some reason
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
+
+" no effect on tmux session
 vnoremap <C-c> "+y
 map <C-p> "+p
 
