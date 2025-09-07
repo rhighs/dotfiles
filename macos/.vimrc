@@ -26,7 +26,7 @@ set nocompatible
 set number
 set autoread
 set autowrite
-set tw=140
+"set tw=140
 set backspace=indent,eol,start
 
 call plug#begin(expand('~/.vim/plugged'))
