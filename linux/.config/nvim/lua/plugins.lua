@@ -4,7 +4,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.cmd "packadd packer.nvim"
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
 augroup packer_user_config
 autocmd!
@@ -12,13 +12,13 @@ autocmd BufWritePost init.lua source <afile> | PackerSync
 augroup end
 ]]
 
--- Use a protected call so we don"t error out on first use
+-- use a protected call so we don"t error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
 	return
 end
 
--- Have packer use a popup window
+-- have packer use a popup window
 packer.init {
 	display = {
 		open_fn = function()
@@ -30,11 +30,9 @@ packer.init {
 return packer.startup(function(use)
 	use "wbthomason/packer.nvim"
 
-    -- LSP and autocompletion config
+    -- lsp and autocompletion config
 	use "neovim/nvim-lspconfig"
 	use "hrsh7th/cmp-nvim-lsp"
-    use "neovim/nvim-lspconfig"
-    use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
@@ -42,37 +40,19 @@ return packer.startup(function(use)
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"
 
-    -- Syntax
+    -- syntax
 	use "leafgarland/typescript-vim"
-	use "peitalin/vim-jsx-typescript"
-	use "pangloss/vim-javascript"
-	use "thesis/vim-solidity"
-	use "elzr/vim-json"
-	use "elixir-editors/vim-elixir"
-	use "zah/nim.vim"
 	use "tikhomirov/vim-glsl"
 	use "cheap-glitch/vim-v"
-	use "Tetralux/odin.vim"
 
-    -- Utilities
+    -- utilities
 	use "jiangmiao/auto-pairs"
 	use "preservim/nerdtree"
 
-    -- Seach tools
+    -- seach tools
 	use "junegunn/fzf"
 	use "junegunn/fzf.vim"
 
-    -- Themes
+    -- themes
 	use "hachy/eva01.vim"
-	use "ghifarit53/tokyonight-vim"
-	use "morhetz/gruvbox"
-	use "skurob/robpur-vim"
-	use "blueshirts/darcula"
-	use "jnurmine/Zenburn"
-	use "tomasiser/vim-code-dark"
-	use "drsooch/gruber-darker-vim"
-	use "sickill/vim-monokai"
-	use "lifepillar/vim-solarized8"
-	use "rhighs/vim-ariake-dark"
-	use "rakr/vim-one"
 end)

@@ -1,19 +1,4 @@
--- vim.cmd [[ packadd completion-nvim ]]
--- vim.cmd [[ packadd nvim-lspconfig ]]
-
 local lsp_config = require("lspconfig")
--- local completion = require("completion")
--- 
--- local custom_attach = function()
---   completion.on_attach()
---   -- Move cursor to the next and previous diagnostic
---   mapper("n", "<leader>dn", "vim.lsp.diagnostic.goto_next()")
---   mapper("n", "<leader>dp", "vim.lsp.diagnostic.goto_prev()")
--- end
--- 
--- lsp.pyls.setup{
---   on_attach = custom_attach
--- }
 
 local cmp = require("cmp")
 cmp.setup({
@@ -23,9 +8,17 @@ cmp.setup({
 })
 
 lsp_config.csharp_ls.setup{}
-lsp_config.pyright.setup{}
-lsp_config.tsserver.setup{}
-lsp_config.omnisharp_mono.setup {}
+lsp_config.pyright.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  on_new_config = function(config, root_dir)
+    local env = vim.trim(vim.fn.system('cd "' .. root_dir .. '"; poetry env info -p 2>/dev/null'))
+    if string.len(env) > 0 then
+      config.settings.python.pythonPath = env .. '/bin/python'
+    end
+  end
+}
+lsp_config.ts_ls.setup{}
 lsp_config.rust_analyzer.setup{
 	settings = {
 		["rust-analyzer"] = {},
@@ -65,7 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+		-- vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
