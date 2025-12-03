@@ -1,6 +1,23 @@
 require("plugins")
-require("mason").setup()
 require("lspconfig-setup")
+
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = {"typescript", "javascript", "typescriptreact", "javascriptreact"},
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.expandtab = true
+  end
+})
+
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true
+})
 
 vim.cmd [[ filetype plugin indent on ]]
 -- show existing tab with 4 spaces width
@@ -30,4 +47,3 @@ vim.cmd[[ set background=dark ]]
 vim.cmd[[ colorscheme eva01 ]]
 
 vim.cmd[[ map <C-n> :NERDTreeToggle<CR> ]]
-
