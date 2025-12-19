@@ -1,5 +1,9 @@
 require("plugins")
+require("mason").setup()
 require("lspconfig-setup")
+require("mason-lspconfig").setup {
+  ensure_installed = { "pyrefly" },
+}
 
 vim.api.nvim_create_autocmd({"FileType"}, {
   pattern = {"typescript", "javascript", "typescriptreact", "javascriptreact"},

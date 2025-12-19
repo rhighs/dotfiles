@@ -37,7 +37,7 @@ vim.lsp.config("rust_analyzer", {
   settings = { ["rust-analyzer"] = {} },
 })
 
-vim.lsp.config("pyright", {
+vim.lsp.config("pyrefly", {
   capabilities = capabilities,
 })
 
@@ -52,7 +52,7 @@ vim.lsp.config("clangd", {
 
 vim.lsp.enable("tsserver")
 vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("pyright")
+vim.lsp.enable("pyrefly")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("clangd")
 
