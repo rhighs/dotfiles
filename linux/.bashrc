@@ -1,8 +1,5 @@
 [[ $- != *i* ]] && return
 
-# common scripts entry sh
-[ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
-
 colors() {
 	local fgc bgc vals seq0
 
@@ -179,3 +176,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . "$HOME/.cargo/env"
+export PATH="$PATH:$HOME/.local/bin"
+
+# common scripts entry sh
+[ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
