@@ -1,6 +1,6 @@
 [terminal.shell]
-program = "/bin/bash"
-args = ["-c", "tmux attach || tmux"]
+program = "/opt/homebrew/bin/tmux"
+args = ["new-session", "-A", "-s", "main"]
 
 [font]
 size = 12.0

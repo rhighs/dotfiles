@@ -34,13 +34,4 @@ export PATH="/Users/roberto.montalti/.rd/bin:$PATH"
 # opencode
 export PATH=/Users/roberto.montalti/.opencode/bin:$PATH
 
-echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
-eval "$(~/.local/bin/mise activate bash)"
-eval "$(~/.local/bin/mise activate bash)"
-eval "$(~/.local/bin/mise activate bash)"
-eval "$(~/.local/bin/mise activate bash)"
-eval "$(~/.local/bin/mise activate bash)"
-eval "$(~/.local/bin/mise activate bash)"
-eval "$(~/.local/bin/mise activate bash)"
-eval "$(~/.local/bin/mise activate bash)"
 eval "$(~/.local/bin/mise activate bash)"
