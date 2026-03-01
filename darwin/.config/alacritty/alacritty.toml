@@ -1,3 +1,7 @@
+[terminal.shell]
+program = "/bin/bash"
+args = ["-c", "tmux attach || tmux"]
+
 [font]
 size = 12.0
 
