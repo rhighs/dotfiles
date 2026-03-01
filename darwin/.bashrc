@@ -21,6 +21,26 @@ export PATH="/opt/homebrew/opt/llvm\@14/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="$PATH:$(python -m site --user-base)/bin"
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
 export DOCKER_BUILDKIT=1
 
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/roberto.montalti/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# opencode
+export PATH=/Users/roberto.montalti/.opencode/bin:$PATH
+
+echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
+eval "$(~/.local/bin/mise activate bash)"
