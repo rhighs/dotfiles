@@ -27,7 +27,6 @@ export DOCKER_BUILDKIT=1
 eval "$(~/.local/bin/mise activate bash)"
 
 # agents stuff
-source "$HOME/.openclaw/completions/openclaw.bash"
 export PATH="$HOME/.opencode/bin:$PATH"
 
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
