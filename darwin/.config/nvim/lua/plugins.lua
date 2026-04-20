@@ -31,7 +31,7 @@ require("lazy").setup({
   { "tikhomirov/vim-glsl" },
 
   -- Utilities
-  { "jiangmiao/auto-pairs" },
+  { "windwp/nvim-autopairs" },
   { "preservim/nerdtree" },
 
   -- Search
