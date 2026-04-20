@@ -1,45 +1,43 @@
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
-	vim.cmd "packadd packer.nvim"
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- use a protected call so we don"t error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+require("lazy").setup({
 
--- have packer use a popup window
-packer.init {
-	display = {
-		open_fn = function()
-			return require("packer.util").float { border = "rounded" }
-		end,
-	},
-}
+  -- Mason: install and manage LSP server binaries
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+  },
 
-return packer.startup(function(use)
-	use "wbthomason/packer.nvim"
+  -- Autocompletion
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-cmdline" },
 
-    -- lsp and autocompletion config
-	use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/nvim-cmp"
+  -- Syntax
+  { "tikhomirov/vim-glsl" },
 
-    -- syntax
-	use "tikhomirov/vim-glsl"
+  -- Utilities
+  { "jiangmiao/auto-pairs" },
+  { "preservim/nerdtree" },
 
-    -- utilities
-	use "jiangmiao/auto-pairs"
-	use "preservim/nerdtree"
+  -- Search
+  { "junegunn/fzf" },
+  { "junegunn/fzf.vim" },
 
-    -- seach tools
-	use "junegunn/fzf"
-	use "junegunn/fzf.vim"
-
-    -- themes
-	use "hachy/eva01.vim"
-end)
+  -- Theme
+  { "hachy/eva01.vim" },
+})

@@ -1,5 +1,4 @@
 require("plugins")
-require("mason").setup()
 require("lspconfig-setup")
 
 vim.cmd [[ filetype plugin indent on ]]
