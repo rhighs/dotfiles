@@ -20,6 +20,8 @@ cmp.setup({
   },
   sources = {
     { name = "nvim_lsp" },
+    { name = "buffer" },
+    { name = "path" },
   },
 })
 
@@ -28,32 +30,40 @@ pcall(function()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 end)
 
-vim.lsp.config("tsserver", {
-  capabilities = capabilities,
-})
+-- Per-server configuration via nvim-lspconfig
+-- mason-lspconfig with automatic_enable=true will call vim.lsp.enable() for each installed server.
+-- We just need to set any custom settings here.
 
 vim.lsp.config("rust_analyzer", {
   capabilities = capabilities,
   settings = { ["rust-analyzer"] = {} },
 })
 
-vim.lsp.config("pyrefly", {
-  capabilities = capabilities,
-})
-
 vim.lsp.config("lua_ls", {
   capabilities = capabilities,
   settings = {
     Lua = {
-      runtime = {
-        version = "LuaJIT",
-      },
+      runtime = { version = "LuaJIT" },
       workspace = {
         checkThirdParty = false,
-        library = { vim.env.VIMRUNTIME },
+        -- Only add Neovim runtime when working inside the Neovim config dir.
+        -- For other Lua projects (Kong, etc.) use a per-project .luarc.json.
+        library = (function()
+          local cwd = vim.fn.getcwd()
+          if cwd:find(vim.fn.stdpath("config"), 1, true) then
+            return { vim.env.VIMRUNTIME }
+          end
+          return {}
+        end)(),
       },
       diagnostics = {
-        globals = { "vim" },
+        globals = (function()
+          local cwd = vim.fn.getcwd()
+          if cwd:find(vim.fn.stdpath("config"), 1, true) then
+            return { "vim" }
+          end
+          return {}
+        end)(),
       },
     },
   },
@@ -64,24 +74,25 @@ vim.lsp.config("clangd", {
   cmd = { "clangd", "--background-index", "--clang-tidy" },
 })
 
-vim.lsp.enable("tsserver")
-vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("pyrefly")
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("clangd")
-
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "gr", vim.lsp.buf.references)
-vim.keymap.set("n", "gy", vim.lsp.buf.type_definition)
-vim.keymap.set("n", "K", vim.lsp.buf.hover)
-vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
-vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename)
-vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action)
-vim.keymap.set("n", "<space>f", function()
-  vim.lsp.buf.format({ async = true })
-end)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+-- LSP keymaps — only active when an LSP server is attached to the buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    vim.keymap.set("n", "gd",        vim.lsp.buf.definition,     opts)
+    vim.keymap.set("n", "gD",        vim.lsp.buf.declaration,    opts)
+    vim.keymap.set("n", "gi",        vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "gr",        vim.lsp.buf.references,     opts)
+    vim.keymap.set("n", "gy",        vim.lsp.buf.type_definition,opts)
+    vim.keymap.set("n", "K",         vim.lsp.buf.hover,          opts)
+    vim.keymap.set("n", "gh",        vim.lsp.buf.hover,          opts)
+    vim.keymap.set("n", "<C-k>",     vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename,         opts)
+    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action,    opts)
+    vim.keymap.set("n", "<space>f",  function()
+      vim.lsp.buf.format({ async = true })
+    end, opts)
+    vim.keymap.set("n", "[d",        vim.diagnostic.goto_prev,   opts)
+    vim.keymap.set("n", "]d",        vim.diagnostic.goto_next,   opts)
+    vim.keymap.set("n", "<space>e",  vim.diagnostic.open_float,  opts)
+  end,
+})

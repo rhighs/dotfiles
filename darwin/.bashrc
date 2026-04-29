@@ -38,4 +38,16 @@ eval "$(fzf --bash)"
 # agents stuff
 export PATH="$HOME/.opencode/bin:$PATH"
 
+git_branch() {
+    if [ -e .git ]; then
+        local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+        if [ $? -eq 0  ]; then
+            echo " [$branch]"
+        fi
+    fi
+}
+
+# update ps1 to include the git branch
+PS1='\u:\W$(git_branch) $ '
+
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
