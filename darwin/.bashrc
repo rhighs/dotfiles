@@ -51,3 +51,6 @@ git_branch() {
 PS1='\u:\W$(git_branch) $ '
 
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
+
+# designkit: claude with the panel doorbell channel loaded (see README, Session panel)
+alias dk='claude --dangerously-load-development-channels server:designkit'
