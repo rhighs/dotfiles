@@ -15,8 +15,8 @@ esac
 GPG_TTY=$(tty)
 export GPG_TTY
 
-export PATH=$PATH:$(go env GOPATH)/bin
-. "$HOME/.cargo/env"
+command -v go >/dev/null 2>&1 && export PATH=$PATH:$(go env GOPATH)/bin
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 eval $(/opt/homebrew/bin/brew shellenv)
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/.local/bin"
