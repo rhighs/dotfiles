@@ -22,5 +22,5 @@ Installs packages, links configs into place and runs `mise install`. Safe to re-
 ## Windows
 
 - Configs are linked with one-line stubs and junctions, symlinks need admin
-- msys2 `HOME` is `C:\msys64\home\<user>`
+- msys2 and cygwin use the Windows home (`db_home: windows`)
 - Defender slows every process spawn, from an elevated shell: `Add-MpPreference -ExclusionPath C:\msys64`
