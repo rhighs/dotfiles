@@ -1,0 +1,6 @@
+brew "git"
+brew "stow"
+brew "tmux"
+brew "mise"
+brew "go"
+cask "alacritty"

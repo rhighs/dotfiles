@@ -180,3 +180,6 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # common scripts entry sh
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
+
+export PATH="$HOME/.local/bin:$PATH"
+command -v mise >/dev/null 2>&1 && eval "$(mise activate bash)"

@@ -1,7 +1,0 @@
-# winget ids installed by install.ps1
-MSYS2.MSYS2
-Git.Git
-Alacritty.Alacritty
-Neovim.Neovim
-junegunn.fzf
-jdx.mise

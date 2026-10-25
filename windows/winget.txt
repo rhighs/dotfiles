@@ -1,0 +1,4 @@
+MSYS2.MSYS2
+Git.Git
+Alacritty.Alacritty
+jdx.mise

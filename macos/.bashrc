@@ -4,13 +4,12 @@ alias pip=pip3
 if command -v npm >/dev/null 2>&1; then
   export PATH="$(npm prefix -g)/bin:$PATH"
 fi
-# pnpm
+
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -27,15 +26,12 @@ fi
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export DOCKER_BUILDKIT=1
 
-# mise
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate bash)"
 fi
 
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
+command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 
-# agents stuff
 export PATH="$HOME/.opencode/bin:$PATH"
 
 git_branch() {
@@ -47,10 +43,8 @@ git_branch() {
     fi
 }
 
-# update ps1 to include the git branch
 PS1='\u:\W$(git_branch) $ '
 
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
 
-# designkit: claude with the panel doorbell channel loaded (see README, Session panel)
 alias dk='DESIGNKIT_CHANNEL=1 claude --dangerously-load-development-channels server:designkit'

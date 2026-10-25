@@ -1,0 +1,12 @@
+[general]
+import = ["~/.config/alacritty/theme.toml"]
+
+[terminal.shell]
+program = "/opt/homebrew/bin/tmux"
+args = ["new-session", "-A", "-s", "main"]
+
+[font]
+size = 12.0
+normal = { family = "Menlo", style = "Regular" }
+bold = { family = "Menlo", style = "Bold" }
+italic = { family = "Menlo", style = "Italic" }
