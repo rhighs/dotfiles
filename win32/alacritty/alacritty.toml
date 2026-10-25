@@ -2,9 +2,10 @@
 working_directory = "C:\\Users\\rober"
 
 # msys2 login bash (MINGW64, inheriting windows PATH) straight into tmux
+# alacritty joins args unquoted on windows, so -c needs its own quotes
 [terminal.shell]
 program = "C:\\msys64\\usr\\bin\\bash.exe"
-args = ["--login", "-c", "exec tmux new-session -A -s main"]
+args = ["--login", "-c", "\"exec tmux new-session -A -s main\""]
 
 [env]
 MSYSTEM = "MINGW64"
