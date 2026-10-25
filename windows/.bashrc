@@ -1,6 +1,3 @@
-WINHOME=${USERPROFILE//\\//}
-d=${WINHOME:0:1}; WINHOME="/${d,,}${WINHOME:2}"; unset d
-
 clean_path() {
     local IFS=: out= p
     for p in $PATH; do
@@ -13,11 +10,11 @@ clean_path() {
     PATH=$out
 }
 
-export PNPM_HOME="$WINHOME/AppData/Local/pnpm"
+export PNPM_HOME="$HOME/AppData/Local/pnpm"
 export PATH="$HOME/.opencode/bin:$PNPM_HOME:$PATH"
-export PATH="$PATH:$WINHOME/AppData/Roaming/npm:$WINHOME/go/bin:$WINHOME/.cargo/bin:$WINHOME/.local/bin"
-for p in "$WINHOME"/AppData/Local/Microsoft/WinGet/Packages/jdx.mise_*/mise/bin; do PATH="$PATH:$p"; done
-export PATH="$PATH:/c/Program Files/Alacritty:$WINHOME/AppData/Local/mise/shims"
+export PATH="$PATH:$HOME/AppData/Roaming/npm:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.local/bin"
+for p in "$HOME"/AppData/Local/Microsoft/WinGet/Packages/jdx.mise_*/mise/bin; do PATH="$PATH:$p"; done
+export PATH="$PATH:/c/Program Files/Alacritty:$HOME/AppData/Local/mise/shims"
 clean_path; unset -f clean_path
 
 export GPG_TTY=$(tty)
