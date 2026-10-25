@@ -1,0 +1,7 @@
+# installed by install.sh via pacman / apt-get / dnf (same names on all three)
+git
+stow
+tmux
+neovim
+fzf
+alacritty

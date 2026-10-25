@@ -1,0 +1,5 @@
+# msys2 packages installed by install.sh
+git
+tmux
+vim
+make
