@@ -1,22 +1,26 @@
 # Dotfiles
 
-Simple dotfiles I use accross different systems, one dir per platform (`darwin`, `linux`, `win32`).
+```
+common/    shared everywhere: nvim, vim, tmux, alacritty theme, mise tools
+macos/     bash, alacritty, Brewfile
+linux/     bash, alacritty, packages.txt
+windows/   bash (msys2), alacritty, winget.txt, pacman.txt
+```
 
-## Usage
+## Setup
 
-Clone and run the bootstrap, it installs packages and links configs. Safe to re-run.
+```sh
+./install.sh                                           # macos, linux
+powershell -ExecutionPolicy Bypass -File install.ps1   # windows
+```
 
-- **darwin/linux**: `./install.sh`
-  - darwin: homebrew + `darwin/Brewfile`, then `stow` into `$HOME`
-  - linux: pacman/apt/dnf with `linux/packages.txt`, mise via mise.run, then `stow`
-- **win32**: `powershell -ExecutionPolicy Bypass -File install.ps1`
-  - winget apps from `win32/winget.txt`, MesloLGS NF font, msys2 update + `win32/pacman.txt`
-  - links via one-line stubs / an nvim junction (no symlinks without admin)
+Installs packages, links configs into place and runs `mise install`. Safe to re-run.
 
-Add a tool by adding a line to the platform's package list.
+- CLI tools go in `common/.config/mise/config.toml`
+- Apps and system packages go in the platform's package list
 
-## Windows notes
+## Windows
 
-- msys2 `HOME` is `C:\msys64\home\<user>`, that's where the `.bashrc`/`.tmux.conf` stubs go.
-- process spawns are slow under Defender, an elevated
-  `Add-MpPreference -ExclusionPath C:\msys64` helps a lot.
+- Configs are linked with one-line stubs and junctions, symlinks need admin
+- msys2 `HOME` is `C:\msys64\home\<user>`
+- Defender slows every process spawn, from an elevated shell: `Add-MpPreference -ExclusionPath C:\msys64`

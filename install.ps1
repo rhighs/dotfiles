@@ -1,41 +1,74 @@
-# windows bootstrap: winget apps + font, msys2 update, then install.sh inside msys2
-# run: powershell -ExecutionPolicy Bypass -File install.ps1
-$root = $PSScriptRoot
+$dot = $PSScriptRoot
+$bash = 'C:\msys64\usr\bin\bash.exe'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-foreach ($line in Get-Content "$root\win32\winget.txt") {
-    $id = ($line -split '#')[0].Trim()
-    if (-not $id) { continue }
-    if ($id -eq 'MSYS2.MSYS2' -and (Test-Path C:\msys64)) { Write-Host "ok $id"; continue }
-    winget list --id $id -e --accept-source-agreements *> $null
-    if ($LASTEXITCODE -eq 0) { Write-Host "ok $id"; continue }
-    winget install --id $id -e --silent --accept-source-agreements --accept-package-agreements
+function Update-Path {
+    $env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [Environment]::GetEnvironmentVariable('Path', 'User')
 }
 
-# MesloLGS NF (menlo-based, used by win32/alacritty), per-user install
-$fontDir = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
+function Set-Stub($file, $content) {
+    if ((Test-Path $file) -and (Get-Content $file -Raw) -eq "$content`n") { return }
+    if ((Test-Path $file) -and -not ((Get-Content $file -Raw) -match [regex]::Escape((Split-Path $dot -Leaf)))) {
+        Move-Item $file "$file.bak" -Force
+    }
+    New-Item -ItemType Directory -Force (Split-Path $file) | Out-Null
+    [IO.File]::WriteAllText($file, "$content`n")
+    Write-Host "linked $file"
+}
+
+function Set-Junction($link, $target) {
+    $item = Get-Item $link -Force -ErrorAction SilentlyContinue
+    if ($item -and $item.LinkType -and ($item.Target -replace '^\\\?\?\\', '') -contains $target) { return }
+    if ($item -and $item.LinkType) { [IO.Directory]::Delete($link) }
+    elseif ($item) { Move-Item $link "$link.bak" -Force }
+    New-Item -ItemType Directory -Force (Split-Path $link) | Out-Null
+    New-Item -ItemType Junction -Path $link -Target $target | Out-Null
+    Write-Host "linked $link"
+}
+
+foreach ($id in Get-Content "$dot\windows\winget.txt") {
+    if ($id -eq 'MSYS2.MSYS2' -and (Test-Path C:\msys64)) { continue }
+    winget list --id $id -e --accept-source-agreements *> $null
+    if ($LASTEXITCODE -ne 0) {
+        winget install --id $id -e --silent --accept-source-agreements --accept-package-agreements
+    }
+}
+Update-Path
+
 $fontReg = 'HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts'
-$have = @()
-foreach ($key in $fontReg, 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts') {
-    $props = Get-ItemProperty $key -ErrorAction SilentlyContinue
-    if ($props) { $have += $props.PSObject.Properties.Name }
+$fonts = foreach ($key in $fontReg, 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts') {
+    (Get-ItemProperty $key -ErrorAction SilentlyContinue).PSObject.Properties.Name
 }
 foreach ($style in 'Regular', 'Bold', 'Italic', 'Bold Italic') {
     $name = "MesloLGS NF $style"
-    if ($have | Where-Object { $_ -like "$name (*" }) { continue }
-    New-Item -ItemType Directory -Force $fontDir | Out-Null
-    $file = "$fontDir\$name.ttf"
+    if ($fonts -like "$name (*") { continue }
+    $file = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts\$name.ttf"
+    New-Item -ItemType Directory -Force (Split-Path $file) | Out-Null
     Invoke-WebRequest "https://github.com/romkatv/powerlevel10k-media/raw/master/$([uri]::EscapeDataString($name)).ttf" -OutFile $file -UseBasicParsing
     New-ItemProperty $fontReg -Name "$name (TrueType)" -Value $file -Force | Out-Null
-    Write-Host "installed font $name"
+    Write-Host "installed $name"
 }
 
-$bash = 'C:\msys64\usr\bin\bash.exe'
 $env:MSYSTEM = 'MINGW64'
-$env:CHERE_INVOKING = '1'
-# core packages update first and can need a second pass
 & $bash -lc 'pacman -Syu --noconfirm'
 & $bash -lc 'pacman -Syu --noconfirm'
-Push-Location $root
-& $bash --login ./install.sh
-Pop-Location
+& $bash -lc "pacman -S --needed --noconfirm $((Get-Content "$dot\windows\pacman.txt") -join ' ')"
+
+$msysHome = (& $bash -lc 'cygpath -w ~').Trim()
+$dotUnix = (& $bash -c "cygpath -u '$dot'").Trim()
+$dotMixed = $dot -replace '\\', '/'
+
+Set-Stub "$env:APPDATA\alacritty\alacritty.toml" "[general]`nimport = [`"$dotMixed/common/.config/alacritty/theme.toml`", `"$dotMixed/windows/alacritty.toml`"]"
+Set-Stub "$msysHome\.bashrc" ". `"$dotUnix/windows/.bashrc`""
+Set-Stub "$msysHome\.tmux.conf" "source-file `"$dotUnix/common/.tmux.conf`""
+Set-Stub "$msysHome\.vimrc" "source $dotUnix/common/.vimrc"
+Set-Junction "$env:LOCALAPPDATA\nvim" "$dot\common\.config\nvim"
+Set-Junction "$HOME\.config\mise" "$dot\common\.config\mise"
+
+$shims = "$env:LOCALAPPDATA\mise\shims"
+$userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+if (($userPath -split ';') -notcontains $shims) {
+    [Environment]::SetEnvironmentVariable('Path', "$userPath;$shims", 'User')
+}
+Update-Path
+mise install
