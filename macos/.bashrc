@@ -48,3 +48,13 @@ PS1='\u:\W$(git_branch) $ '
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
 
 alias dk='DESIGNKIT_CHANNEL=1 claude --dangerously-load-development-channels server:designkit'
+
+export SUPERWIKI_WORKSPACE="$HOME/repos/superwiki"
+
+pnpm() {
+  if [ "$1" = "dev" ]; then
+    NODE_OPTIONS="--max-old-space-size=1536 ${NODE_OPTIONS}" command pnpm "$@"
+  else
+    command pnpm "$@"
+  fi
+}

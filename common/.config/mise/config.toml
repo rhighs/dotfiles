@@ -1,3 +1,6 @@
 [tools]
 neovim = "latest"
 fzf = "latest"
+node = "22"
+python = "3.11"
+uv = "latest"
