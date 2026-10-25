@@ -1,78 +1,77 @@
-local install_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
-	vim.cmd "packadd packer.nvim"
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-augroup packer_user_config
-autocmd!
-autocmd BufWritePost init.lua source <afile> | PackerSync
-augroup end
-]]
+require("lazy").setup({
 
--- Use a protected call so we don"t error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+  -- Mason: installs LSP server binaries
+  {
+    "mason-org/mason.nvim",
+    cmd = "Mason",
+    build = ":MasonUpdate",
+    config = function()
+      require("mason").setup()
+    end,
+  },
 
--- Have packer use a popup window
-packer.init {
-	display = {
-		open_fn = function()
-			return require("packer.util").float { border = "rounded" }
-		end,
-	},
-}
+  -- nvim-lspconfig: provides default cmd/filetypes config per server
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "mason-org/mason.nvim" },
+  },
 
-return packer.startup(function(use)
-	use "wbthomason/packer.nvim"
+  -- mason-lspconfig: bridges mason installs → vim.lsp.enable(), auto-installs servers
+  {
+    "mason-org/mason-lspconfig.nvim",
+    lazy = false,
+    dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls",
+          "ts_ls",
+          "rust_analyzer",
+          "clangd",
+          "pyrefly",
+        },
+        automatic_enable = true,
+      })
+    end,
+  },
 
-    -- LSP and autocompletion config
-	use "neovim/nvim-lspconfig"
-	use "hrsh7th/cmp-nvim-lsp"
-    use "neovim/nvim-lspconfig"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/nvim-cmp"
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
+  -- Autocompletion — must load early so capabilities are ready when LSP starts
+  { "hrsh7th/nvim-cmp",      lazy = false },
+  { "hrsh7th/cmp-nvim-lsp",  lazy = false },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-cmdline" },
 
-    -- Syntax
-	use "leafgarland/typescript-vim"
-	use "peitalin/vim-jsx-typescript"
-	use "pangloss/vim-javascript"
-	use "thesis/vim-solidity"
-	use "elzr/vim-json"
-	use "elixir-editors/vim-elixir"
-	use "zah/nim.vim"
-	use "tikhomirov/vim-glsl"
-	use "cheap-glitch/vim-v"
-	use "Tetralux/odin.vim"
+  -- Syntax
+  { "tikhomirov/vim-glsl" },
 
-    -- Utilities
-	use "jiangmiao/auto-pairs"
-	use "preservim/nerdtree"
+  -- Utilities
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup()
+    end,
+  },
+  { "preservim/nerdtree" },
 
-    -- Seach tools
-	use "junegunn/fzf"
-	use "junegunn/fzf.vim"
+  -- Search
+  { "junegunn/fzf" },
+  { "junegunn/fzf.vim" },
 
-    -- Themes
-	use "hachy/eva01.vim"
-	use "ghifarit53/tokyonight-vim"
-	use "morhetz/gruvbox"
-	use "skurob/robpur-vim"
-	use "blueshirts/darcula"
-	use "jnurmine/Zenburn"
-	use "tomasiser/vim-code-dark"
-	use "drsooch/gruber-darker-vim"
-	use "sickill/vim-monokai"
-	use "lifepillar/vim-solarized8"
-	use "rhighs/vim-ariake-dark"
-	use "rakr/vim-one"
-end)
+  -- Theme
+  { "hachy/eva01.vim" },
+})
