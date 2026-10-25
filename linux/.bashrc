@@ -153,3 +153,4 @@ export PATH="$PATH:$HOME/.local/bin"
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
 
 command -v mise >/dev/null 2>&1 && eval "$(mise activate bash)"
+command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
