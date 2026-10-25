@@ -9,7 +9,7 @@ function Update-Path {
 function Set-Stub($file, $content) {
     if ((Test-Path $file) -and (Get-Content $file -Raw) -eq "$content`n") { return }
     if ((Test-Path $file) -and -not ((Get-Content $file -Raw) -match [regex]::Escape((Split-Path $dot -Leaf)))) {
-        Move-Item $file "$file.bak" -Force
+        Move-Item $file "$file.$(Get-Date -Format yyyyMMddHHmmss).bak"
     }
     New-Item -ItemType Directory -Force (Split-Path $file) | Out-Null
     [IO.File]::WriteAllText($file, "$content`n")
@@ -20,7 +20,7 @@ function Set-Junction($link, $target) {
     $item = Get-Item $link -Force -ErrorAction SilentlyContinue
     if ($item -and $item.LinkType -and ($item.Target -replace '^\\\?\?\\', '') -contains $target) { return }
     if ($item -and $item.LinkType) { [IO.Directory]::Delete($link) }
-    elseif ($item) { Move-Item $link "$link.bak" -Force }
+    elseif ($item) { Move-Item $link "$link.$(Get-Date -Format yyyyMMddHHmmss).bak" }
     New-Item -ItemType Directory -Force (Split-Path $link) | Out-Null
     New-Item -ItemType Junction -Path $link -Target $target | Out-Null
     Write-Host "linked $link"
@@ -49,19 +49,26 @@ foreach ($style in 'Regular', 'Bold', 'Italic', 'Bold Italic') {
     Write-Host "installed $name"
 }
 
+foreach ($ns in 'C:\msys64\etc\nsswitch.conf', 'C:\cygwin64\etc\nsswitch.conf') {
+    if (-not (Test-Path $ns)) { continue }
+    $lines = Get-Content $ns
+    if ($lines -contains 'db_home: windows') { continue }
+    $lines = @($lines | Where-Object { $_ -notmatch '^db_home:' }) + 'db_home: windows'
+    [IO.File]::WriteAllText($ns, ($lines -join "`n") + "`n")
+}
+
 $env:MSYSTEM = 'MINGW64'
 & $bash -lc 'pacman -Syu --noconfirm'
 & $bash -lc 'pacman -Syu --noconfirm'
 & $bash -lc "pacman -S --needed --noconfirm $((Get-Content "$dot\windows\pacman.txt") -join ' ')"
 
-$msysHome = (& $bash -lc 'cygpath -w ~').Trim()
-$dotUnix = (& $bash -c "cygpath -u '$dot'").Trim()
+$dotUnix = '/' + $dot.Substring(0, 1).ToLower() + ($dot.Substring(2) -replace '\\', '/')
 $dotMixed = $dot -replace '\\', '/'
 
 Set-Stub "$env:APPDATA\alacritty\alacritty.toml" "[general]`nimport = [`"$dotMixed/common/.config/alacritty/theme.toml`", `"$dotMixed/windows/alacritty.toml`"]"
-Set-Stub "$msysHome\.bashrc" ". `"$dotUnix/windows/.bashrc`""
-Set-Stub "$msysHome\.tmux.conf" "source-file `"$dotUnix/common/.tmux.conf`""
-Set-Stub "$msysHome\.vimrc" "source $dotUnix/common/.vimrc"
+Set-Stub "$HOME\.bashrc" ". `"$dotUnix/windows/.bashrc`""
+Set-Stub "$HOME\.tmux.conf" "source-file `"$dotUnix/common/.tmux.conf`""
+Set-Stub "$HOME\.vimrc" "source $dotMixed/common/.vimrc"
 Set-Junction "$env:LOCALAPPDATA\nvim" "$dot\common\.config\nvim"
 Set-Junction "$HOME\.config\mise" "$dot\common\.config\mise"
 
