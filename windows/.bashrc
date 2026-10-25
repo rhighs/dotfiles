@@ -16,6 +16,7 @@ clean_path() {
 export PNPM_HOME="$WINHOME/AppData/Local/pnpm"
 export PATH="$HOME/.opencode/bin:$PNPM_HOME:$PATH"
 export PATH="$PATH:$WINHOME/AppData/Roaming/npm:$WINHOME/go/bin:$WINHOME/.cargo/bin:$WINHOME/.local/bin"
+for p in "$WINHOME"/AppData/Local/Microsoft/WinGet/Packages/jdx.mise_*/mise/bin; do PATH="$PATH:$p"; done
 export PATH="$PATH:/c/Program Files/Alacritty:$WINHOME/AppData/Local/mise/shims"
 clean_path; unset -f clean_path
 
