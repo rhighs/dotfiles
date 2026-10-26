@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+tmux has-session 2>/dev/null || exit 0
+tmux run-shell -b "$HOME/.tmux/plugins/tmux-continuum/scripts/continuum_save.sh"
