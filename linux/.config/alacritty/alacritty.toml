@@ -2,8 +2,8 @@
 import = ["~/.config/alacritty/theme.toml"]
 
 [terminal.shell]
-program = "tmux"
-args = ["-u", "new-session", "-A", "-s", "main"]
+program = "/bin/bash"
+args = ["--login"]
 
 [font]
 size = 8.0

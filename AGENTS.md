@@ -17,7 +17,7 @@ cd ~/repos/dotfiles
 powershell -ExecutionPolicy Bypass -File install.ps1   # windows
 ```
 
-Then open Alacritty, it should land in tmux session `main`.
+Alacritty opens a login shell. Attach to tmux explicitly with `tmux -u new-session -A -s main`.
 
 ## Changing things
 

@@ -58,9 +58,3 @@ pnpm() {
     command pnpm "$@"
   fi
 }
-
-if [[ $- == *i* && -n "$SSH_CONNECTION" && -z "$TMUX" ]] && command -v tmux >/dev/null 2>&1; then
-    export LANG=en_US.UTF-8
-    export LC_CTYPE=en_US.UTF-8
-    exec tmux -u new-session -A -s main
-fi

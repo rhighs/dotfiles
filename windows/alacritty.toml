@@ -1,6 +1,6 @@
 [terminal.shell]
 program = "C:\\msys64\\usr\\bin\\bash.exe"
-args = ["--login", "-c", "\"exec tmux -u new-session -A -s main -c $(cygpath $USERPROFILE)\""]
+args = ["--login"]
 
 [env]
 LANG = "en_US.UTF-8"
