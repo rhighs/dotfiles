@@ -1,8 +1,10 @@
 [terminal.shell]
 program = "C:\\msys64\\usr\\bin\\bash.exe"
-args = ["--login", "-c", "\"exec tmux new-session -A -s main -c $(cygpath $USERPROFILE)\""]
+args = ["--login", "-c", "\"exec tmux -u new-session -A -s main -c $(cygpath $USERPROFILE)\""]
 
 [env]
+LANG = "en_US.UTF-8"
+LC_CTYPE = "en_US.UTF-8"
 MSYSTEM = "MINGW64"
 CHERE_INVOKING = "1"
 MSYS2_PATH_TYPE = "inherit"

@@ -14,7 +14,10 @@ write() {
 <dict>
   <key>Label</key><string>$label</string>
   <key>EnvironmentVariables</key>
-  <dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string></dict>
+  <dict>
+    <key>LANG</key><string>en_US.UTF-8</string>
+    <key>LC_CTYPE</key><string>en_US.UTF-8</string>
+    <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string></dict>
 $body
 </dict>
 </plist>
@@ -30,7 +33,7 @@ PL
 }
 
 write dev.rhighs.tmux "  <key>ProgramArguments</key>
-  <array><string>/bin/sh</string><string>-c</string><string>$tmux_bin has-session -t main 2>/dev/null || exec $tmux_bin new-session -d -s main</string></array>
+  <array><string>/bin/sh</string><string>-c</string><string>$tmux_bin has-session -t main 2>/dev/null || exec $tmux_bin -u new-session -d -s main</string></array>
   <key>RunAtLoad</key><true/>
   <key>AbandonProcessGroup</key><true/>"
 

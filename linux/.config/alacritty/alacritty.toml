@@ -3,10 +3,14 @@ import = ["~/.config/alacritty/theme.toml"]
 
 [terminal.shell]
 program = "tmux"
-args = ["new-session", "-A", "-s", "main"]
+args = ["-u", "new-session", "-A", "-s", "main"]
 
 [font]
 size = 8.0
 normal = { family = "Source Code Pro", style = "Regular" }
 bold = { family = "Source Code Pro", style = "Bold" }
 italic = { family = "Source Code Pro", style = "Italic" }
+
+[env]
+LANG = "C.UTF-8"
+LC_CTYPE = "C.UTF-8"
