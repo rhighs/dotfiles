@@ -170,3 +170,5 @@ nmap <leader>ca  <Plug>(coc-codeaction-selected)
 set laststatus=2
  
 source ~/.vim/plugged/robpur-vim/autoload/robpur-status.vim
+
+source ~/.config/yankref/yankref.vim

@@ -47,3 +47,5 @@ vim.cmd[[ set background=dark ]]
 vim.cmd[[ colorscheme eva01 ]]
 
 vim.cmd[[ map <C-n> :NERDTreeToggle<CR> ]]
+
+vim.cmd("source ~/.config/yankref/yankref.vim")
