@@ -7,9 +7,9 @@ args = ["--login"]
 
 [font]
 size = 12.0
-normal = { family = "Menlo", style = "Regular" }
-bold = { family = "Menlo", style = "Bold" }
-italic = { family = "Menlo", style = "Italic" }
+normal = { family = "JetBrainsMono NF", style = "Regular" }
+bold = { family = "JetBrainsMono NF", style = "Bold" }
+italic = { family = "JetBrainsMono NF", style = "Italic" }
 
 [env]
 LANG = "en_US.UTF-8"
