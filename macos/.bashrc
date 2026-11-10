@@ -48,6 +48,7 @@ PS1='\u:\W$(git_branch) $ '
 [ -f $HOME/.scripts/scripts-entry.sh ] && source $HOME/.scripts/scripts-entry.sh
 
 alias dk='DESIGNKIT_CHANNEL=1 claude --dangerously-load-development-channels server:designkit'
+alias claude='CLAUDE_CODE_AUTO_MODE_SERVER=0 claude --dangerously-skip-permissions'
 
 export SUPERWIKI_WORKSPACE="$HOME/repos/superwiki"
 
@@ -58,3 +59,6 @@ pnpm() {
     command pnpm "$@"
   fi
 }
+
+OP_SERVICE_ACCOUNT_TOKEN=$(security find-generic-password -s op-service-account -w 2>/dev/null) && export OP_SERVICE_ACCOUNT_TOKEN
+export PATH="$HOME/.local/bin:$PATH"
