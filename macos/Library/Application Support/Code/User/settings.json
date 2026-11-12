@@ -1,0 +1,134 @@
+{
+  "editor.guides.bracketPairs": false,
+  "editor.guides.indentation": false,
+  "editor.lineNumbers": "relative",
+  "editor.inlayHints.enabled": "off",
+  "editor.showFoldingControls": "never",
+  "editor.glyphMargin": true,
+  "window.menuBarVisibility": "toggle",
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": true,
+  "editor.renderLineHighlight": "none",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.overviewRulerBorder": false,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "workbench.layoutControl.enabled": false,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.tree.renderIndentGuides": "none",
+  "explorer.openEditors.visible": 0,
+  "explorer.decorations.colors": false,
+  "editor.guides.highlightActiveBracketPair": false,
+  "editor.guides.bracketPairsHorizontal": false,
+  "editor.lineHeight": 1.2,
+  "editor.renderWhitespace": "none",
+  "editor.bracketPairColorization.enabled": false,
+  "vim.handleKeys": {
+    "<C-d>": true,
+    "<C-s>": false,
+    "<C-z>": false,
+    "<C-p>": false,
+    "<C-b>": false,
+    "<C-j>": false
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+  "workbench.colorTheme": "Darkened",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "terminal.external.osxExec": "Iterm2.app",
+  "security.workspace.trust.untrustedFiles": "open",
+  "cmake.automaticReconfigure": false,
+  "cmake.configureOnEdit": false,
+  "window.titleBarStyle": "custom",
+  "editor.fontFamily": "'Source Code Pro', 'monospace', monospace",
+  "editor.fontSize": 10,
+  "workbench.activityBar.location": "top",
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  },
+  "editor.accessibilitySupport": "off",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontWeight": "640",
+  "editor.wordWrap": "on",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "go.toolsManagement.autoUpdate": true,
+  "playwright.reuseBrowser": true,
+  "playwright.showTrace": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "Lua.diagnostics.enable": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vim.statusBarColorControl": false,
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1,
+    "asvetliakov.vscode-neovim": 1
+  },
+  "window.customTitleBarVisibility": "auto",
+  "rewrap.wrappingColumn": 80,
+  "markdown-preview-enhanced.enablePreviewZenMode": true,
+  "markdown-preview-enhanced.previewTheme": "atom-light.css",
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [
+      80
+    ],
+    "editor.selectionHighlight": false,
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask"
+  ],
+  "workbench.navigationControl.enabled": false,
+  "window.commandCenter": false,
+  "kotlin.languageServer.enabled": false,
+  "kotlin.debugAdapter.enabled": false,
+  "docker.extension.enableComposeLanguageServer": false,
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "inlineChat.accessibleDiffView": "off",
+  "chat.disableAIFeatures": true,
+  "terminal.integrated.initialHint": false,
+  "chat.commandCenter.enabled": false,
+  "chat.agent.enabled": false,
+  "chat.mcp.discovery.enabled": {
+    "claude-desktop": false,
+    "windsurf": false,
+    "cursor-global": false,
+    "cursor-workspace": false
+  },
+  "pendant.runtimeSource": "external",
+  "chat.viewSessions.orientation": "stacked"
+}
