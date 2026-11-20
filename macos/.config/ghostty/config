@@ -1,0 +1,30 @@
+background = #2a2d37
+foreground = #c0c5ce
+
+cursor-color = #c0c5ce
+cursor-text = #2a2d37
+
+selection-background = #4f5b66
+selection-foreground = #f5faff
+
+palette = 0=#1c1f26
+palette = 1=#e05252
+palette = 2=#9aefea
+palette = 3=#e0c285
+palette = 4=#85b1e0
+palette = 5=#a571f4
+palette = 6=#93ddfb
+palette = 7=#b9bed5
+palette = 8=#555c77
+palette = 9=#e05252
+palette = 10=#9aefea
+palette = 11=#dda2f6
+palette = 12=#93ddfb
+palette = 13=#dda2f6
+palette = 14=#9aefea
+palette = 15=#f5faff
+
+font-family = JetBrainsMono NF
+font-size = 12
+
+command = /bin/bash --login
