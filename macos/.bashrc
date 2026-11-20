@@ -1,3 +1,5 @@
+[ -f "$HOME/.config/shell/locale.sh" ] && . "$HOME/.config/shell/locale.sh"
+
 alias python=python3
 alias pip=pip3
 

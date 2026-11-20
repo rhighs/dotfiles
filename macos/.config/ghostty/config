@@ -2,6 +2,8 @@ theme = dotfiles
 
 command = /bin/bash --login
 font-family = JetBrainsMono Nerd Font
+font-family = Apple Symbols
+font-family = Apple Color Emoji
 font-size = 12
 font-thicken = true
 font-feature = -calt

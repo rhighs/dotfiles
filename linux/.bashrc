@@ -1,3 +1,5 @@
+[ -f "$HOME/.config/shell/locale.sh" ] && . "$HOME/.config/shell/locale.sh"
+
 [[ $- != *i* ]] && return
 
 colors() {

@@ -1,3 +1,5 @@
+[ -f "$HOME/.config/shell/locale.sh" ] && . "$HOME/.config/shell/locale.sh"
+
 clean_path() {
     local IFS=: out= p
     for p in $PATH; do
