@@ -63,14 +63,14 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'drsooch/gruber-darker-vim'
 Plug 'sickill/vim-monokai'
 Plug 'lifepillar/vim-solarized8'
-Plug 'rhighs/vim-ariake-dark'
+Plug 'davidcelis/vim-ariake-dark'
 Plug 'rakr/vim-one'
 call plug#end()
 
 set termguicolors
 set background=light
 "colorscheme eva01
-colorscheme ariake
+colorscheme ariake-dark
 "colorscheme one
 "colorscheme darcula
 "colorscheme robpur-mk2
