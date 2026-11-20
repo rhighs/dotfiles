@@ -17,7 +17,7 @@ else
     esac
 fi
 
-unset LC_ALL LANG LC_CTYPE
+unset LC_ALL
 for loc in en_US.UTF-8 C.UTF-8 en_GB.UTF-8; do
     case "$(LANG=$loc LC_CTYPE=$loc locale charmap 2>/dev/null)" in
         UTF-8|utf8) export LANG=$loc LC_CTYPE=$loc; break ;;
