@@ -37,6 +37,9 @@ stow --restow --ignore='Brewfile|packages\.txt' -t "$HOME" common "$os"
 mise install
 
 if [ "$os" = macos ]; then
+    defaults write org.alacritty ApplePressAndHoldEnabled -bool false
+    defaults write org.alacritty InitialKeyRepeat -int 10
+    defaults write org.alacritty KeyRepeat -int 1
     [ -d "$HOME/.tmux/plugins/tpm" ] || git clone -q https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
     "$HOME/.tmux/plugins/tpm/bin/install_plugins"
     scripts/tmux-launchd.sh
