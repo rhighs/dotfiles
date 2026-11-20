@@ -1,9 +1,9 @@
 # Dotfiles
 
 ```
-common/    shared everywhere: nvim, vim, tmux, alacritty theme, mise tools
-macos/     bash, alacritty, Brewfile
-linux/     bash, alacritty, packages.txt
+common/    shared everywhere: nvim, vim, tmux, alacritty/ghostty themes, mise tools
+macos/     bash, alacritty, ghostty, Brewfile
+linux/     bash, alacritty, ghostty, packages.txt
 windows/   bash (msys2), alacritty, winget.txt, pacman.txt
 ```
 
@@ -27,6 +27,20 @@ Installs packages, links configs into place and runs `mise install`. Safe to re-
 
 ## Terminal sessions
 
-Alacritty opens a login shell on all platforms. On macOS, use Command+T for a new native tab and Command+N for a new window. Each starts an independent shell.
+Alacritty opens a login shell on all platforms. Ghostty does the same on macOS and Linux; it does not support Windows. On macOS, use Command+T for a new native tab and Command+N for a new window. Each starts an independent shell.
 
 Run `tmux -u new-session -A -s main` only in the tab you want attached to tmux. For a remote machine, connect with SSH first, then run that command there. SSH login does not attach automatically. Detach with Ctrl+B, then D; the session keeps running.
+
+## Ghostty
+
+The installer links both terminal configs through Stow; neither replaces the other.
+Ghostty uses a brighter, higher-contrast version of the Alacritty palette.
+Both use the same login shell and platform-specific font settings:
+JetBrainsMono Nerd Font at 12pt on macOS, Source Code Pro at 8pt on Linux.
+macOS installs Ghostty and the Nerd Font through the Brewfile. On Linux, install
+Ghostty using [its distribution instructions](https://ghostty.org/docs/install/binary)
+and install Source Code Pro with your package manager.
+
+On macOS, `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
+loads after the XDG config and can override it. Keep personal overrides there,
+or back it up to use only these dotfiles.

@@ -1,20 +1,16 @@
-# How to talk to the user
+# No promotional attribution
 
-Short. Technical. The simplest words that are still exact. No emoji.
+Do not add AI, model, or agent branding, generated-by footers, session links, or AI co-author trailers to commits, pull requests, issues, comments, documents, or other artifacts. Preserve existing licenses, credits, and required disclosures.
 
-- Point first. Give the answer, then stop. Never build up to it.
-- Plain words. Say "it broke", not "the invocation failed". Keep exact names: paths, commands, errors, numbers.
-- Name a technical thing once, then use plain words for it.
-- One idea per block, one or two short lines. No long paragraphs.
-- Bold the thing a block is about, so the eye can land.
-- Leave things out: no reasoning unless asked, one example not three, no background the user has, no options you dropped. If they want more, they will ask.
-- End with one or two lines: what you skipped or did not check, and any risk.
+# Wording
 
-Never hide a problem to stay short. Say when something broke, when you are guessing, and when something is risky. If a short answer would mislead, give the longer one.
+Use everyday words and a natural tone. Say what works and what's left in a few short sentences. Skip paths, test lists and internal names unless I ask or they explain a problem. Explain any necessary jargon. No forced slang, emoji or repeated recap.
 
-This applies only to chat. Code, files, commits, docs and tool inputs keep their normal form. When a table, diff or code block says it better, use it.
+Keep facts, failures, uncertainty and warnings intact. This controls chat only, not code, files, commands or exact quotations. Follow my configured wording preferences and any explicit request for more detail.
 
 # How to change code
+
+When brainstorming or redesigning, inspect the current behavior, then recommend the simplest complete design and name what it can remove. Don't make me choose from a menu unless the answer materially changes the plan or risk.
 
 Solve the whole problem with the least new code. Take the first option that fully works:
 
@@ -29,3 +25,7 @@ Solve the whole problem with the least new code. Take the first option that full
 - Deleting beats adding. The shortest working diff wins, if a reader gets it at a glance.
 - New non-trivial logic leaves one small test. Trivial changes need none.
 - Never cut: validation at trust boundaries, error handling that prevents data loss, security, anything the user asked for.
+
+# Diagrams
+
+When explaining a system or flow, proactively include a small fenced `mermaid` diagram if it makes relationships, handoffs, branches, or state changes clearer than prose. Prefer `flowchart TD` for structure and decisions and `sequenceDiagram` for message order. Keep labels short and state the takeaway in prose so it still makes sense if the terminal shows the source. Skip the diagram when a sentence or short list is clearer.

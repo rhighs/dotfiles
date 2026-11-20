@@ -1,0 +1,14 @@
+theme = dotfiles
+
+command = /bin/bash --login
+font-family = Source Code Pro
+font-size = 8
+font-feature = -calt
+font-feature = -liga
+window-padding-x = 0
+window-padding-y = 0
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+env = LANG=C.UTF-8
+env = LC_CTYPE=C.UTF-8
