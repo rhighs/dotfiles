@@ -4,3 +4,6 @@ fi
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="$HOME/.resend/bin:$PATH"
+
+# Hermes Agent command
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac
