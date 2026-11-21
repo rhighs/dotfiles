@@ -34,7 +34,8 @@ Run `tmux -u new-session -A -s main` only in the tab you want attached to tmux. 
 ## Ghostty
 
 The installer links both terminal configs through Stow; neither replaces the other.
-Ghostty uses a brighter, higher-contrast version of the Alacritty palette.
+Ghostty uses a brighter, higher-contrast version of the Alacritty palette and
+follows the system light/dark appearance (`theme = light:dotfiles-light,dark:dotfiles`).
 Both use the same login shell and platform-specific font settings:
 JetBrainsMono Nerd Font at 12pt on macOS, Source Code Pro at 8pt on Linux.
 macOS installs Ghostty and the Nerd Font through the Brewfile. On Linux, install

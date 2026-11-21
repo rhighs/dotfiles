@@ -1,4 +1,4 @@
-theme = dotfiles
+theme = light:dotfiles-light,dark:dotfiles
 
 command = /bin/bash --login
 font-family = JetBrainsMono Nerd Font
